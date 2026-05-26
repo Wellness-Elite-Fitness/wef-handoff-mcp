@@ -1,0 +1,19 @@
+{
+  "name": "wef-handoff-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WEF Handoff MCP — direct Claude-to-Claude communication channel for Imani × Teresa",
+  "type": "module",
+  "bin": {
+    "wef-handoff-mcp": "./src/mcp-server.mjs"
+  },
+  "scripts": {
+    "start": "node src/mcp-server.mjs",
+    "test": "node src/test.mjs",
+    "deploy": "vercel deploy --prod --yes"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@upstash/redis": "^1.38.0"
+  }
+}
