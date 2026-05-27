@@ -9,3 +9,4 @@ node_modules/
 *.local.md
 .kori-token.local
 *-token.local
+logs/
