@@ -24,6 +24,7 @@ function kv() {
 const TOKENS = {
   imani: process.env.WEF_HANDOFF_TOKEN_IMANI,
   teresa: process.env.WEF_HANDOFF_TOKEN_TERESA,
+  kori: process.env.WEF_HANDOFF_TOKEN_KORI,
 };
 
 function authenticate(req) {
@@ -36,7 +37,7 @@ function authenticate(req) {
   return user;
 }
 
-const VALID_USERS = ['imani', 'teresa'];
+const VALID_USERS = ['imani', 'teresa', 'kori'];
 
 export default async function handler(req, res) {
   res.setHeader('content-type', 'application/json');
@@ -46,11 +47,12 @@ export default async function handler(req, res) {
         WEF_HANDOFF_TOKEN_IMANI: !!process.env.WEF_HANDOFF_TOKEN_IMANI,
         WEF_HANDOFF_TOKEN_IMANI_len: (process.env.WEF_HANDOFF_TOKEN_IMANI || '').length,
         WEF_HANDOFF_TOKEN_TERESA: !!process.env.WEF_HANDOFF_TOKEN_TERESA,
+        WEF_HANDOFF_TOKEN_KORI: !!process.env.WEF_HANDOFF_TOKEN_KORI,
         UPSTASH_REDIS_REST_URL: !!process.env.UPSTASH_REDIS_REST_URL,
         UPSTASH_REDIS_REST_TOKEN: !!process.env.UPSTASH_REDIS_REST_TOKEN,
         KV_REST_API_URL: !!process.env.KV_REST_API_URL,
       },
-      tokens_loaded: { imani: !!TOKENS.imani, teresa: !!TOKENS.teresa, imani_len: (TOKENS.imani || '').length },
+      tokens_loaded: { imani: !!TOKENS.imani, teresa: !!TOKENS.teresa, kori: !!TOKENS.kori, imani_len: (TOKENS.imani || '').length },
     });
   }
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });

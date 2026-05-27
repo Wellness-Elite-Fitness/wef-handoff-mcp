@@ -13,10 +13,11 @@
  *
  * Env vars (set in ~/.claude/mcp.json per user):
  *   WEF_HANDOFF_BACKEND   default: https://wef-handoff.vercel.app
- *   WEF_HANDOFF_TOKEN     required — your bearer token (Imani's differs from Teresa's)
- *   WEF_HANDOFF_USER      required — "imani" | "teresa"
+ *   WEF_HANDOFF_TOKEN     required — your bearer token (each user's differs)
+ *   WEF_HANDOFF_USER      required — "imani" | "teresa" | "kori"
  *
- * 2026-05-26 — first cut. Pair channel only (imani <-> teresa). Group channels later.
+ * 2026-05-26 — first cut. Pair channel (imani <-> teresa).
+ * 2026-05-27 — added kori (WEF manager, Team seat). Now a 3-party channel.
  */
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
@@ -61,7 +62,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         type: 'object',
         required: ['to', 'subject', 'body'],
         properties: {
-          to: { type: 'string', enum: ['imani', 'teresa'], description: 'Recipient — "imani" or "teresa"' },
+          to: { type: 'string', enum: ['imani', 'teresa', 'kori'], description: 'Recipient — "imani", "teresa", or "kori"' },
           subject: { type: 'string', description: 'One-line subject, ≤120 chars' },
           body: { type: 'string', description: 'Message body in markdown. Be specific; the recipient\'s Claude will summarize this on their next session.' },
           urgency: { type: 'string', enum: ['fyi', 'normal', 'urgent'], description: 'How soon the recipient should see this. "urgent" surfaces immediately on their next session start.' },

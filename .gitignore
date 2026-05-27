@@ -5,3 +5,7 @@ node_modules/
 .env.*.local
 *.log
 .DS_Store
+# Secrets — handoff bearer tokens + per-user setup files
+*.local.md
+.kori-token.local
+*-token.local
