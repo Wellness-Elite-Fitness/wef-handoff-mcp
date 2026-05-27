@@ -4,8 +4,9 @@
  * when Imani is away from the terminal.
  *
  * How "away" is detected: a message is only auto-answered once it has sat UNREAD
- * for longer than STALE_MINUTES. If Imani is actively working he picks it up and
+ * for longer than STALE_MINUTES (5). If Imani is actively working he picks it up and
  * acks it first; if it's still unread after the window, he's away and the bot steps in.
+ * Poll cadence (Task Scheduler) is matched to 5 min so the window is meaningful.
  *
  * Engine: headless `claude -p` in the wef-web-2026 repo with READ-ONLY tools. This
  * gives Teresa/Kori Imani's fully-loaded Claude (repo access + global/project
@@ -30,7 +31,7 @@ import { execFileSync } from 'node:child_process';
 
 const BACKEND = 'https://wef-handoff.vercel.app';
 const ASKERS = ['teresa', 'kori'];
-const STALE_MINUTES = 20;            // proxy for "Imani is away from the terminal"
+const STALE_MINUTES = 5;             // proxy for "Imani is away from the terminal"
 const MODEL = 'claude-sonnet-4-6';   // cost-discipline default; capable for Q&A
 const ALLOWED_TOOLS = 'Read,Grep,Glob,WebFetch,WebSearch';
 const REPO = 'C:/Users/lower/OneDrive/Documents/Coding Projects/wef-web-2026';
